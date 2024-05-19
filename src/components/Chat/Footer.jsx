@@ -147,7 +147,7 @@ const Footer = ({refresh}) => {
                 refresh()
             }).catch(() => {
 
-            }).finally(() => setValue(""));
+            }).finally(() => setValue(""), fileInputRef.current.files = []);
         }
     }
 
