@@ -1,4 +1,4 @@
-import request from "../utils/request";
+import request from '../utils/request';
 
 class UserService {
   constructor(req) {
@@ -6,7 +6,11 @@ class UserService {
   }
 
   async getUserInfo() {
-    return this.req.get("/users");
+    return this.req.get('/users');
+  }
+
+  async getUserInfoByPhoneNumber(phoneNumber) {
+    return this.req.get(`/users/${phoneNumber}/phone`);
   }
 }
 

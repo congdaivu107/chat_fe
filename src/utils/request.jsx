@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { notification } from "antd";
-import axios from "axios";
-import localStorageService from "../services/localStorageService";
-import { APP_KEY } from "../common/constant";
+import { notification } from 'antd';
+import axios from 'axios';
+import localStorageService from '../services/localStorageService';
+import { APP_KEY } from '../common/constant';
 
 const baseConfig = {
   timeout: 10000,
-  baseURL: "https://chat-app-backend-1h8e.onrender.com/api",
+  baseURL: 'http://localhost:3000/api',
 };
 
 class Request {
@@ -16,13 +15,13 @@ class Request {
     this.instance = axios.create(config);
     this.instance.interceptors.request.use(
       (requestConfig) => {
-        const token = localStorageService.getValue(APP_KEY.token) || "";
+        const token = localStorageService.getValue(APP_KEY.token) || '';
         requestConfig.headers.Authorization = `Bearer ${token}`;
         return requestConfig;
       },
       (err) => {
-        console.error("request interceptors error:", err);
-      }
+        console.error('request interceptors error:', err);
+      },
     );
 
     this.instance.interceptors.response.use(
@@ -37,9 +36,10 @@ class Request {
       },
       async (error) => {
         const { status, data } = error.response || {};
-        const { errorCode = "", details } = data;
+        const { errorCode = '', details } = data;
 
-        const msg = details.map((detail) => detail.message).join(", ");
+        console.log(data);
+        const msg = details.map((detail) => detail.message).join(', ');
 
         if (status === 400) {
           notification.error({ message: msg });
@@ -50,16 +50,16 @@ class Request {
           const originalRequest = error.config;
           // clear userinfo
 
-          if (errorCode === "token_expired" && !originalRequest._retry) {
+          if (errorCode === 'token_expired' && !originalRequest._retry) {
             const refreshToken =
               localStorageService.getValue(APP_KEY.refreshToken) || null;
             if (refreshToken) {
               originalRequest._retry = true;
               try {
                 const resp = await fetch(`${baseConfig.baseURL}/auth/token`, {
-                  method: "POST",
+                  method: 'POST',
                   headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                   },
                   body: JSON.stringify({ token: refreshToken }),
                 }).then((data) => data.json());
@@ -70,7 +70,7 @@ class Request {
                 localStorageService.setValue(APP_KEY.token, accessToken);
                 localStorageService.setValue(
                   APP_KEY.refreshToken,
-                  _refreshToken
+                  _refreshToken,
                 );
 
                 originalRequest.headers.Authorization = accessToken;
@@ -81,7 +81,7 @@ class Request {
                 });
               }
             } else {
-              notification.error({ message: "no refresh token" });
+              notification.error({ message: 'no refresh token' });
             }
           }
           return Promise.reject(false);
@@ -99,14 +99,15 @@ class Request {
         }
 
         if (status >= 500) {
+          console.log(data);
           console.error(
             `Request failed with status code ${500}, ${
-              "Server external error" || ""
-            }`
+              'Server external error' || ''
+            }`,
           );
         }
         return Promise.reject(data);
-      }
+      },
     );
   }
 
