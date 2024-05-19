@@ -1,6 +1,6 @@
 import { notification } from 'antd';
 import axios from 'axios';
-import localStorageService from '../services/localStorageService';
+import localStorageService from '../services/localStorageService.js';
 import { APP_KEY } from '../common/constant';
 
 const baseConfig = {

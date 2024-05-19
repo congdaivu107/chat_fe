@@ -9,9 +9,9 @@ import FormProvider, { RHFTextField } from "../../components/hook-form";
 import { Eye, EyeSlash } from "phosphor-react";
 // import { LoginUser } from "../../redux/slices/auth";
 // import { useDispatch, useSelector } from "react-redux";
-import authService from "../../services/authService";
+import authService from "../../services/authService.js";
 import { APP_KEY } from "../../common/constant";
-import localStorageService from "../../services/localStorageService";
+import localStorageService from "../../services/localStorageService.js";
 import { useNavigate } from "react-router-dom/dist";
 
 export default function AuthLoginForm() {

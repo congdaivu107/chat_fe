@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -6,34 +6,34 @@ import {
   IconButton,
   Stack,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 import {
   ArchiveBox,
   CircleDashed,
   MagnifyingGlass,
   Users,
-} from "phosphor-react";
-import { SimpleBarStyle } from "../../components/Scrollbar";
-import { useTheme } from "@mui/material/styles";
-import useResponsive from "../../hooks/useResponsive";
-import BottomNav from "../../layouts/dashboard/BottomNav";
-import { ChatList } from "../../data";
-import ChatElement from "../../components/ChatElement";
+} from 'phosphor-react';
+import { SimpleBarStyle } from '../../components/Scrollbar';
+import { useTheme } from '@mui/material/styles';
+import useResponsive from '../../hooks/useResponsive';
+import BottomNav from '../../layouts/dashboard/BottomNav';
+import { ChatList } from '../../data';
+import ChatElement from '../../components/ChatElement';
 import {
   Search,
   SearchIconWrapper,
   StyledInputBase,
-} from "../../components/Search";
-import Friends from "../../sections/Dashboard/Friends";
+} from '../../components/Search';
+import Friends from '../../sections/Dashboard/Friends';
 // import { socket } from "../../socket";
 // import { useDispatch, useSelector } from "react-redux";
 // import { FetchDirectConversations } from "../../redux/slices/conversation";
 
-const user_id = window.localStorage.getItem("user_id");
+const user_id = window.localStorage.getItem('user_id');
 
 const Conversations = () => {
   const theme = useTheme();
-  const isDesktop = useResponsive("up", "md");
+  const isDesktop = useResponsive('up', 'md');
 
   useEffect(() => {}, []);
 
@@ -50,15 +50,15 @@ const Conversations = () => {
     <>
       <Box
         sx={{
-          position: "relative",
-          height: "100%",
-          width: isDesktop ? 440 : "100vw",
+          position: 'relative',
+          height: '100%',
+          width: isDesktop ? 440 : '100vw',
           backgroundColor:
-            theme.palette.mode === "light"
-              ? "#F8FAFF"
+            theme.palette.mode === 'light'
+              ? '#F8FAFF'
               : theme.palette.background,
 
-          boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
+          boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
         }}
       >
         {!isDesktop && (
@@ -66,41 +66,41 @@ const Conversations = () => {
           <BottomNav />
         )}
 
-        <Stack p={3} spacing={2} sx={{ maxHeight: "100vh" }}>
+        <Stack p={3} spacing={2} sx={{ maxHeight: '100vh' }}>
           <Stack
-            alignItems={"center"}
+            alignItems={'center'}
             justifyContent="space-between"
             direction="row"
           >
             <Typography variant="h5">Conversations</Typography>
 
-            <Stack direction={"row"} alignItems="center" spacing={1}>
+            <Stack direction={'row'} alignItems="center" spacing={1}>
               <IconButton
                 onClick={() => {
                   handleOpenDialog();
                 }}
-                sx={{ width: "max-content" }}
+                sx={{ width: 'max-content' }}
               >
                 <Users />
               </IconButton>
-              <IconButton sx={{ width: "max-content" }}>
+              <IconButton sx={{ width: 'max-content' }}>
                 <CircleDashed />
               </IconButton>
             </Stack>
           </Stack>
-          <Stack sx={{ width: "100%" }}>
+          <Stack sx={{ width: '100%' }}>
             <Search>
               <SearchIconWrapper>
                 <MagnifyingGlass color="#709CE6" />
               </SearchIconWrapper>
               <StyledInputBase
                 placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
+                inputProps={{ 'aria-label': 'search' }}
               />
             </Search>
           </Stack>
           <Stack spacing={1}>
-            <Stack direction={"row"} spacing={1.5} alignItems="center">
+            <Stack direction={'row'} spacing={1.5} alignItems="center">
               <ArchiveBox size={24} />
               <Button variant="text">Archive</Button>
             </Stack>
@@ -109,18 +109,18 @@ const Conversations = () => {
           <Stack
             sx={{
               flexGrow: 1,
-              overflowY: "scroll",
-              height: "100%",
+              overflowY: 'scroll',
+              height: '100%',
             }}
           >
             <SimpleBarStyle timeout={500} clickOnTrack={false}>
-              <Stack spacing={2.4} sx={{ overflow: "hidden" }}>
-                <Typography variant="subtitle2" sx={{ color: "#676667" }}>
+              <Stack spacing={2.4} sx={{ overflow: 'hidden', height: 'auto' }}>
+                <Typography variant="subtitle2" sx={{ color: '#676667' }}>
                   All Conversations
                 </Typography>
                 {/* Chat List */}
                 {ChatList.filter((el) => !el.pinned).map((el, idx) => {
-                  return <ChatElement {...el} />;
+                  return <ChatElement {...el} key={idx} />;
                 })}
               </Stack>
             </SimpleBarStyle>

@@ -7,8 +7,8 @@ import { LoadingButton } from '@mui/lab';
 import FormProvider, { RHFTextField } from '../../components/hook-form';
 import { Eye, EyeSlash } from 'phosphor-react';
 import { useNavigate } from 'react-router-dom';
-import localStorageService from '../../services/localStorageService';
-import userService from '../../services/userService';
+import localStorageService from '../../services/localStorageService.js';
+import userService from '../../services/userService.js';
 import { notification } from 'antd';
 
 export default function RegisterForm() {

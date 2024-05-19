@@ -10,9 +10,9 @@ import {
   auth,
   signInWithPhoneNumber,
 } from '../../firebaseConfig';
-import localStorageService from '../../services/localStorageService';
+import localStorageService from '../../services/localStorageService.js';
 import { notification } from 'antd';
-import authService from '../../services/authService';
+import authService from '../../services/authService.js';
 import { APP_KEY } from '../../common/constant';
 
 export default function VerifyForm() {
