@@ -15,17 +15,12 @@ import messageService from "../../services/messageService.js";
 import userStore from "../../store/userStore.js";
 import conversationStore from "../../store/conversationStore.js";
 
-const Conversation = ({isMobile, menu, conversationId}) => {
+const Conversation = ({isMobile, menu, conversationId, messages, isLoading}) => {
     const {user} = userStore()
-
-    const {
-        data, isLoading
-    } = useSWR(`/messages/${conversationId}`, () => messageService.getMessageListByConversationId(conversationId))
-
 
     return (isLoading ? <CircularProgress/> : <Box p={isMobile ? 1 : 3}>
         <Stack spacing={3}>
-            {data.messages.map((message) => {
+            {messages.map((message) => {
                 return {
                     type: 'msg',
                     message: message.text,
@@ -78,8 +73,12 @@ const ChatPage = () => {
     const {id} = useParams();
     const {
         data, isLoading
-    } = useSWR(`/conversations/${id}`, () => conversationService.getConversationById(id));
+    } = useSWR(`/conversations/${id}`, () => conversationService.getConversationById(id), {refreshInterval: 2000});
 
+
+    const {
+        data: messageData, isLoading: messageLoading, mutate: refresh
+    } = useSWR(`/messages/${id}`, () => messageService.getMessageListByConversationId(id), {refreshInterval: 1000})
     const {setConversation, UnSetConversation} = conversationStore();
 
     useEffect(() => {
@@ -118,12 +117,13 @@ const ChatPage = () => {
                     }}
                 >
                     <SimpleBarStyle timeout={500} clickOnTrack={false}>
-                        <Conversation menu={true} isMobile={isMobile} conversationId={id}/>
+                        <Conversation menu={true} isMobile={isMobile} conversationId={id}
+                                      messages={messageData ? messageData.messages : []} isLoading={messageLoading}/>
                     </SimpleBarStyle>
                 </Box>
 
                 {/*  */}
-                <ChatFooter/>
+                <ChatFooter refresh={refresh}/>
             </Stack>
             {/* {(() => {
         switch (sideBar.type) {

@@ -110,7 +110,7 @@ const Conversations = () => {
                                 const data = {
                                     img: el.members.length > 2 ? el.avatar : friend.avatar,
                                     name: el.members.length > 2 ? sliceName(el.name) : sliceName(friend.displayName),
-                                    msg: el.message ? (Array.isArray(el.message.files) ? "Ảnh ..." : (el.message?.text ? el.message?.text : "")) : "Chưa có tin nhắn",
+                                    msg: el.message ? (Array.isArray(el.message.files) && el.message.files.length > 0 ? "Ảnh ..." : (el.message?.text ? el.message?.text : "")) : "Chưa có tin nhắn",
                                     time: moment(el.createdAt).fromNow(),
                                     unread: 0,
                                     online: true,
