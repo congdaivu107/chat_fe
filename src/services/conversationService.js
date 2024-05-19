@@ -8,6 +8,10 @@ class ConversationService {
     async getConversationList() {
         return this.req.get('/conversations');
     }
+
+    async getConversationById(id) {
+        return this.req.get(`/conversations/${id}`);
+    }
 }
 
 const conversationService = new ConversationService(request);
