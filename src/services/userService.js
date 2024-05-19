@@ -12,6 +12,14 @@ class UserService {
   async getUserInfoByPhoneNumber(phoneNumber) {
     return this.req.get(`/users/${phoneNumber}/phone`);
   }
+
+  async updateUserNameAndAvatar(data) {
+    return this.req.put('/users', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  }
 }
 
 const userService = new UserService(request);

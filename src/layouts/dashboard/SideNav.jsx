@@ -1,10 +1,23 @@
-import React from "react";
 import {useTheme} from "@mui/material/styles";
 
-import {Avatar, Box, Divider, IconButton, Stack} from "@mui/material";
+import {
+    Avatar,
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Divider,
+    FormControl,
+    FormHelperText,
+    IconButton,
+    Input,
+    InputLabel,
+    Stack, TextField, Typography
+} from "@mui/material";
 import AntSwitch from "../../components/AntSwitch";
 
-import Logo from "../../assets/Images/logo.webp";
 
 import useSettings from "../../hooks/useSettings";
 import {Nav_Buttons, Nav_Setting} from "../../data";
@@ -12,8 +25,9 @@ import {Nav_Buttons, Nav_Setting} from "../../data";
 // import ProfileMenu from "./ProfileMenu";
 import {useNavigate} from "react-router-dom";
 import userStore from "../../store/userStore.js";
-// import { useDispatch, useSelector } from "react-redux";
-// import { UpdateTab } from "../../redux/slices/app";
+import {useState} from "react";
+import UpdateInfoDialog from "../../components/UpdateInfoDialog/index.jsx";
+
 
 const getPath = (index) => {
     switch (index) {
@@ -45,124 +59,102 @@ const SideBar = () => {
     const selectedTab = tab;
 
     const handleChangeTab = (index) => {
-        // dispatch(UpdateTab({ tab: index }));
         navigate(getPath(index));
     };
 
-    return (
-        <Box
-            sx={{
-                height: "100vh",
-                width: 100,
 
-                backgroundColor:
-                    theme.palette.mode === "light"
-                        ? "#F0F4FA"
-                        : theme.palette.background.paper,
-                boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
-            }}
+    return (<Box
+        sx={{
+            height: "100vh",
+            width: 100,
+
+            backgroundColor: theme.palette.mode === "light" ? "#F0F4FA" : theme.palette.background.paper,
+            boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
+        }}
+    >
+        <Stack
+            py={3}
+            alignItems={"center"}
+            justifyContent="space-between"
+            sx={{height: "100%"}}
         >
-            <Stack
-                py={3}
-                alignItems={"center"}
-                justifyContent="space-between"
-                sx={{height: "100%"}}
-            >
-                <Stack alignItems={"center"} spacing={4}>
+            <Stack alignItems={"center"} spacing={4}>
+                {user.avatar ? <Avatar src={user.avatar}/> : <UpdateInfoDialog/>}
+                <Stack
+                    sx={{width: "max-content"}}
+                    direction="column"
+                    alignItems={"center"}
+                    spacing={3}
+                >
+                    {Nav_Buttons.map((el) => {
+                        return el.index === selectedTab ? (<Box
+                            sx={{
+                                backgroundColor: theme.palette.primary.main, borderRadius: 1.5,
+                            }}
+                            p={1}
+                        >
+                            <IconButton
+                                onClick={() => {
+                                    handleChangeTab(el.index);
+                                }}
+                                sx={{width: "max-content", color: "#ffffff"}}
+                            >
+                                {el.icon}
+                            </IconButton>
+                        </Box>) : (<IconButton
+                            onClick={() => {
+                                handleChangeTab(el.index);
+                            }}
+                            sx={{
+                                width: "max-content",
+                                color: theme.palette.mode === "light" ? "#080707" : theme.palette.text.primary,
+                            }}
+                        >
+                            {el.icon}
+                        </IconButton>);
+                    })}
+                    <Divider sx={{width: 48}}/>
+                    {Nav_Setting.map((el) => {
+                        return el.index === selectedTab ? (<Box
+                            sx={{
+                                backgroundColor: theme.palette.primary.main, borderRadius: 1.5,
+                            }}
+                            p={1}
+                        >
+                            <IconButton
+                                onClick={() => {
+                                    handleChangeTab(el.index);
+                                }}
+                                sx={{width: "max-content", color: "#ffffff"}}
+                            >
+                                {el.icon}
+                            </IconButton>
+                        </Box>) : (<IconButton
+                            onClick={() => {
+                                handleChangeTab(el.index);
 
-                    {user.avatar ? <Avatar src={user.avatar}/> : null}
-                    <Stack
-                        sx={{width: "max-content"}}
-                        direction="column"
-                        alignItems={"center"}
-                        spacing={3}
-                    >
-                        {Nav_Buttons.map((el) => {
-                            return el.index === selectedTab ? (
-                                <Box
-                                    sx={{
-                                        backgroundColor: theme.palette.primary.main,
-                                        borderRadius: 1.5,
-                                    }}
-                                    p={1}
-                                >
-                                    <IconButton
-                                        onClick={() => {
-                                            handleChangeTab(el.index);
-                                        }}
-                                        sx={{width: "max-content", color: "#ffffff"}}
-                                    >
-                                        {el.icon}
-                                    </IconButton>
-                                </Box>
-                            ) : (
-                                <IconButton
-                                    onClick={() => {
-                                        handleChangeTab(el.index);
-                                    }}
-                                    sx={{
-                                        width: "max-content",
-                                        color:
-                                            theme.palette.mode === "light"
-                                                ? "#080707"
-                                                : theme.palette.text.primary,
-                                    }}
-                                >
-                                    {el.icon}
-                                </IconButton>
-                            );
-                        })}
-                        <Divider sx={{width: 48}}/>
-                        {Nav_Setting.map((el) => {
-                            return el.index === selectedTab ? (
-                                <Box
-                                    sx={{
-                                        backgroundColor: theme.palette.primary.main,
-                                        borderRadius: 1.5,
-                                    }}
-                                    p={1}
-                                >
-                                    <IconButton
-                                        onClick={() => {
-                                            handleChangeTab(el.index);
-                                        }}
-                                        sx={{width: "max-content", color: "#ffffff"}}
-                                    >
-                                        {el.icon}
-                                    </IconButton>
-                                </Box>
-                            ) : (
-                                <IconButton
-                                    onClick={() => {
-                                        handleChangeTab(el.index);
-
-                                        // dispatch(UpdateTab(el.index));
-                                    }}
-                                    sx={{
-                                        width: "max-content",
-                                        color:
-                                            theme.palette.mode === "light"
-                                                ? "#080707"
-                                                : theme.palette.text.primary,
-                                    }}
-                                >
-                                    {el.icon}
-                                </IconButton>
-                            );
-                        })}
-                    </Stack>
-                </Stack>
-                <Stack spacing={4}>
-                    <AntSwitch
-                        defaultChecked={theme.palette.mode === "dark"}
-                        onChange={onToggleMode}
-                    />
-                    {/* Profile Menu */}
-                    {/* <ProfileMenu /> */}
+                                // dispatch(UpdateTab(el.index));
+                            }}
+                            sx={{
+                                width: "max-content",
+                                color: theme.palette.mode === "light" ? "#080707" : theme.palette.text.primary,
+                            }}
+                        >
+                            {el.icon}
+                        </IconButton>);
+                    })}
                 </Stack>
             </Stack>
-        </Box>
-    );
+            <Stack spacing={4}>
+                <AntSwitch
+                    defaultChecked={theme.palette.mode === "dark"}
+                    onChange={onToggleMode}
+                />
+                {/* Profile Menu */}
+                {/* <ProfileMenu /> */}
+            </Stack>
+        </Stack>
+    </Box>);
 };
 
 export default SideBar;
