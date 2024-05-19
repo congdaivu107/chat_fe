@@ -111,7 +111,7 @@ const Conversations = () => {
                                     img: el.members.length > 2 ? el.avatar : friend.avatar,
                                     name: el.members.length > 2 ? sliceName(el.name) : sliceName(friend.displayName),
                                     msg: el.message ? (Array.isArray(el.message.files) && el.message.files.length > 0 ? "Ảnh ..." : (el.message?.text ? el.message?.text : "")) : "Chưa có tin nhắn",
-                                    time: moment(el.createdAt).fromNow(),
+                                    time: moment(el.updatedAt).fromNow(),
                                     unread: 0,
                                     online: true,
                                     id: el._id

@@ -29,7 +29,7 @@ const Conversation = ({isMobile, menu, conversationId, messages, isLoading}) => 
                     incoming: user._id !== message.senderId._id,
                     outgoing: user._id === message.senderId._id,
                 }
-            }).map((el, idx) => {
+            }).reverse().map((el, idx) => {
                 switch (el.type) {
                     case "divider":
                         return (// Timeline
