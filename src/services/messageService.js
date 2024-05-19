@@ -6,7 +6,7 @@ class MessageService {
     }
 
     async getMessageListByConversationId(id) {
-        return this.req.get(`/messages/${id}?page=1&limit=5`);
+        return this.req.get(`/messages/${id}?page=1&limit=10`);
     }
 
     async sendMessage(formData) {
