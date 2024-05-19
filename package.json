@@ -30,6 +30,7 @@
     "faker": "^6.6.6",
     "firebase": "^10.12.0",
     "framer-motion": "^7.5.3",
+    "moment": "^2.30.1",
     "phosphor-react": "^1.4.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

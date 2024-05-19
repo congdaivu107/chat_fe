@@ -1,8 +1,6 @@
-import React from "react";
 import { useTheme } from "@mui/material/styles";
 import { Box, Stack } from "@mui/material";
 
-import { useSearchParams } from "react-router-dom";
 import Chats from "./Conversations";
 import NoChat from "../../assets/Illustration/NoChat";
 import { Outlet, useParams } from "react-router-dom/dist";
@@ -10,11 +8,6 @@ import { Outlet, useParams } from "react-router-dom/dist";
 const ConversationPage = () => {
   let { id } = useParams();
   const theme = useTheme();
-
-  const sideBar = {
-    open: true,
-    type: "CONTACT",
-  };
 
   return (
     <>
