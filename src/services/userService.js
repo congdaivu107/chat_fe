@@ -14,11 +14,12 @@ class UserService {
   }
 
   async updateUserNameAndAvatar(data) {
-    return this.req.put('/users', data, {
+    const response = await this.req.put('/users', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
+    return response.data;
   }
 }
 

@@ -1,9 +1,9 @@
 import { Stack, Typography } from '@mui/material';
-import VerifyForm from '../../sections/auth/VerifyForm';
+import OTPVerifyForm from '../../sections/auth/Verify_ResetPWForm';
 
 // ----------------------------------------------------------------------
 
-export default function VerifyPage() {
+export default function OtpVerifyPage() {
   return (
     <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
       <Typography variant="h4">Vui lòng xác minh OTP</Typography>
@@ -12,7 +12,7 @@ export default function VerifyPage() {
           Đã gửi đến số điện thoại của bạn
         </Typography>
       </Stack>
-      <VerifyForm />
+      <OTPVerifyForm />
     </Stack>
   );
 }

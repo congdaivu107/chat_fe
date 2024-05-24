@@ -1,18 +1,18 @@
-import { useState } from "react";
-import * as Yup from "yup";
-import { Link as RouterLink } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, Stack, Alert, IconButton, InputAdornment } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import FormProvider, { RHFTextField } from "../../components/hook-form";
-import { Eye, EyeSlash } from "phosphor-react";
+import { useState } from 'react';
+import * as Yup from 'yup';
+import { Link as RouterLink } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import FormProvider, { RHFTextField } from '../../components/hook-form';
+import { Eye, EyeSlash } from 'phosphor-react';
 // import { LoginUser } from "../../redux/slices/auth";
 // import { useDispatch, useSelector } from "react-redux";
-import authService from "../../services/authService.js";
-import { APP_KEY } from "../../common/constant";
-import localStorageService from "../../services/localStorageService.js";
-import { useNavigate } from "react-router-dom/dist";
+import authService from '../../services/authService.js';
+import { APP_KEY } from '../../common/constant';
+import localStorageService from '../../services/localStorageService.js';
+import { useNavigate } from 'react-router-dom/dist';
 
 export default function AuthLoginForm() {
   // const dispatch = useDispatch();
@@ -23,16 +23,16 @@ export default function AuthLoginForm() {
 
   const LoginSchema = Yup.object().shape({
     phoneNumber: Yup.string()
-      .required("Phone number is required")
-      .matches(/^\d{10}$/, "Phone number must be 10 digits"),
+      .required('Yêu cầu nhập số điện thoại')
+      .matches(/^\d{10}$/, 'Số điện thoại phải có 10 số'),
     password: Yup.string()
-      .required("Password is required")
-      .min(8, "Password must be at least 8 characters"),
+      .required('Yêu cầu nhập mật khẩu')
+      .min(8, 'Mật khẩu cần dài ít nhất 8 ký tự'),
   });
 
   const defaultValues = {
-    phoneNumber: "",
-    password: "",
+    phoneNumber: '',
+    password: '',
   };
 
   const methods = useForm({
@@ -55,12 +55,12 @@ export default function AuthLoginForm() {
         localStorageService.setValue(APP_KEY.token, resp.access_token);
         localStorageService.setValue(APP_KEY.refreshToken, resp.refresh_token);
         // dispatch(LoginUser(resp));
-        navigate("/conversations");
+        navigate('/conversations');
       })
       .catch((error) => {
         console.error(error);
         reset();
-        setError("afterSubmit", {
+        setError('afterSubmit', {
           ...error,
           message: error.message,
         });
@@ -75,12 +75,12 @@ export default function AuthLoginForm() {
           <Alert severity="error">{errors.afterSubmit.message}</Alert>
         )} */}
 
-        <RHFTextField name="phoneNumber" label="Phone number" />
+        <RHFTextField name="phoneNumber" label="Số điện thoại" />
 
         <RHFTextField
           name="password"
-          label="Password"
-          type={showPassword ? "text" : "password"}
+          label="Mật khẩu"
+          type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -104,7 +104,7 @@ export default function AuthLoginForm() {
           color="inherit"
           underline="always"
         >
-          Forgot password?
+          Quên mật khẩu?
         </Link>
       </Stack>
 
@@ -116,17 +116,17 @@ export default function AuthLoginForm() {
         variant="contained"
         loading={isLoading}
         sx={{
-          bgcolor: "text.primary",
+          bgcolor: 'text.primary',
           color: (theme) =>
-            theme.palette.mode === "light" ? "common.white" : "grey.800",
-          "&:hover": {
-            bgcolor: "text.primary",
+            theme.palette.mode === 'light' ? 'common.white' : 'grey.800',
+          '&:hover': {
+            bgcolor: 'text.primary',
             color: (theme) =>
-              theme.palette.mode === "light" ? "common.white" : "grey.800",
+              theme.palette.mode === 'light' ? 'common.white' : 'grey.800',
           },
         }}
       >
-        Login
+        Đăng nhập
       </LoadingButton>
     </FormProvider>
   );

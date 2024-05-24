@@ -1,5 +1,5 @@
-import React from "react";
-import * as Yup from "yup";
+import React from 'react';
+import * as Yup from 'yup';
 import {
   Button,
   Dialog,
@@ -7,43 +7,43 @@ import {
   DialogTitle,
   Slide,
   Stack,
-} from "@mui/material";
+} from '@mui/material';
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import FormProvider from "../../components/hook-form/FormProvider";
-import { RHFTextField } from "../../components/hook-form";
-import RHFAutocomplete from "../../components/hook-form/RHFAutocomplete";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import FormProvider from '../../components/hook-form/FormProvider';
+import { RHFTextField } from '../../components/hook-form';
+import RHFAutocomplete from '../../components/hook-form/RHFAutocomplete';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const TAGS_OPTION = [
-  "Toy Story 3",
-  "Logan",
-  "Full Metal Jacket",
-  "Dangal",
-  "The Sting",
-  "2001: A Space Odyssey",
+  'Toy Story 3',
+  'Logan',
+  'Full Metal Jacket',
+  'Dangal',
+  'The Sting',
+  '2001: A Space Odyssey',
   "Singin' in the Rain",
-  "Toy Story",
-  "Bicycle Thieves",
-  "The Kid",
-  "Inglourious Basterds",
-  "Snatch",
-  "3 Idiots",
+  'Toy Story',
+  'Bicycle Thieves',
+  'The Kid',
+  'Inglourious Basterds',
+  'Snatch',
+  '3 Idiots',
 ];
 
 const CreateGroupForm = ({ handleClose }) => {
   const NewGroupSchema = Yup.object().shape({
-    title: Yup.string().required("Title is required"),
+    title: Yup.string().required('Title is required'),
 
-    members: Yup.array().min(2, "Must have at least 2 members"),
+    members: Yup.array().min(2, 'Must have at least 2 members'),
   });
 
   const defaultValues = {
-    title: "",
+    title: '',
 
     tags: [],
   };
@@ -64,7 +64,7 @@ const CreateGroupForm = ({ handleClose }) => {
   const onSubmit = async (data) => {
     try {
       //  API Call
-      console.log("DATA", data);
+      console.log('DATA', data);
     } catch (error) {
       console.error(error);
     }
@@ -80,17 +80,17 @@ const CreateGroupForm = ({ handleClose }) => {
           multiple
           freeSolo
           options={TAGS_OPTION.map((option) => option)}
-          ChipProps={{ size: "medium" }}
+          ChipProps={{ size: 'medium' }}
         />
         <Stack
           spacing={2}
-          direction={"row"}
+          direction={'row'}
           alignItems="center"
-          justifyContent={"end"}
+          justifyContent={'end'}
         >
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Hủy</Button>
           <Button type="submit" variant="contained">
-            Create
+            Tạo mới
           </Button>
         </Stack>
       </Stack>
@@ -110,7 +110,7 @@ const CreateGroup = ({ open, handleClose }) => {
       aria-describedby="alert-dialog-slide-description"
       sx={{ p: 4 }}
     >
-      <DialogTitle>{"Create New Group"}</DialogTitle>
+      <DialogTitle>{'Tạo nhóm mới'}</DialogTitle>
 
       <DialogContent sx={{ mt: 4 }}>
         {/* Create Group Form */}

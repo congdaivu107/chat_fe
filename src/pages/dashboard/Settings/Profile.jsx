@@ -1,65 +1,73 @@
-import React, { useEffect } from "react";
-import { Box, IconButton, Stack, Typography } from "@mui/material";
-import { CaretLeft } from "phosphor-react";
-import ProfileForm from "../../../sections/Dashboard/Settings/ProfileForm";
-// import { useDispatch } from "react-redux";
-// import { FetchUserProfile } from "../../../redux/slices/app";
+import React, { useEffect, useState } from 'react';
+import { Box, CircularProgress, Typography, Container } from '@mui/material';
+import userService from '../../../services/userService';
+import ProfileForm from '../../../sections/Dashboard/Settings/ProfileForm';
 
-const Profile = () => {
-  // const dispatch = useDispatch();
+export default function ProfilePage() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // dispatch(FetchUserProfile());
+    const fetchUserInfo = async () => {
+      try {
+        const userInfo = await userService.getUserInfo();
+        setUser(userInfo);
+      } catch (error) {
+        console.error('Failed to fetch user info', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUserInfo();
   }, []);
 
+  const handleUserUpdate = (updatedUser) => {
+    setUser(updatedUser);
+  };
+
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
-    <>
-      <Stack direction="row" sx={{ width: "100%" }}>
-        {/* Left Pane */}
-        <Box
-          sx={{
-            overflowY: "scroll",
-
-            height: "100vh",
-            width: 320,
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? "#F8FAFF"
-                : theme.palette.background,
-
-            boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
-          }}
-        >
-          <Stack p={4} spacing={5}>
-            {/* Header */}
-            <Stack direction="row" alignItems={"center"} spacing={3}>
-              <IconButton>
-                <CaretLeft size={24} color={"#4B4B4B"} />
-              </IconButton>
-
-              <Typography variant="h5">Profile</Typography>
-            </Stack>
-
-            {/* Profile Edit Form */}
-            <ProfileForm />
-          </Stack>
-        </Box>
-
-        {/* Right Pane */}
-        <Box
-          sx={{
-            height: "100%",
-            width: "calc(100vw - 420px )",
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? "#FFF"
-                : theme.palette.background.paper,
-            borderBottom: "6px solid #0162C4",
-          }}
-        ></Box>
-      </Stack>
-    </>
+    <Container maxWidth="sm">
+      {user ? (
+        <>
+          <Box
+            sx={{
+              my: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <img
+              src={user.avatar}
+              alt="User Avatar"
+              style={{ width: '140px', height: '140px', borderRadius: '50%' }}
+            />
+            <Typography variant="h5" sx={{ mt: 2, fontWeight: 'bold' }}>
+              {user.displayName}
+            </Typography>
+          </Box>
+          <ProfileForm user={user} onUserUpdate={handleUserUpdate} />
+        </>
+      ) : (
+        <Typography variant="h6" color="error">
+          Không tải được thông tin người dùng.
+        </Typography>
+      )}
+    </Container>
   );
-};
-
-export default Profile;
+}

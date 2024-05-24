@@ -1,4 +1,4 @@
-import request from "../utils/request";
+import request from '../utils/request';
 
 class AuthService {
   constructor(req) {
@@ -6,13 +6,15 @@ class AuthService {
   }
 
   async login(data) {
-    return this.req.post("/auth/login", data);
+    return this.req.post('/auth/login', data);
   }
 
   async register(data) {
-    return this.req.post("/auth/signup", data);
+    return this.req.post('/auth/signup', data);
   }
-
+  async changePassword(data) {
+    return this.req.post('/auth', data);
+  }
   // async revokeToken(refresh_token){
   //   return this.req.post
   // }

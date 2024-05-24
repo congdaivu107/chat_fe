@@ -1,5 +1,5 @@
-import React from "react";
-import { useTheme } from "@mui/material/styles";
+import React from 'react';
+import { useTheme } from '@mui/material/styles';
 import {
   Box,
   IconButton,
@@ -8,21 +8,21 @@ import {
   Tabs,
   Tab,
   Grid,
-} from "@mui/material";
-import { ArrowLeft } from "phosphor-react";
-import useResponsive from "../../hooks/useResponsive";
+} from '@mui/material';
+import { ArrowLeft } from 'phosphor-react';
+import useResponsive from '../../hooks/useResponsive';
 // import { useDispatch } from "react-redux";
 // import { UpdateSidebarType } from "../../redux/slices/app";
-import { faker } from "@faker-js/faker";
-import { DocMsg, LinkMsg } from "./Conversation";
-import { Shared_docs, Shared_links } from "../../data";
+import { faker } from '@faker-js/faker';
+import { DocMsg, LinkMsg } from './Conversation';
+import { Shared_docs, Shared_links } from '../../data';
 
 const Media = () => {
   // const dispatch = useDispatch();
 
   const theme = useTheme();
 
-  const isDesktop = useResponsive("up", "md");
+  const isDesktop = useResponsive('up', 'md');
 
   const [value, setValue] = React.useState(0);
 
@@ -31,22 +31,22 @@ const Media = () => {
   };
 
   return (
-    <Box sx={{ width: !isDesktop ? "100vw" : 320, maxHeight: "100vh" }}>
-      <Stack sx={{ height: "100%" }}>
+    <Box sx={{ width: !isDesktop ? '100vw' : 320, maxHeight: '100vh' }}>
+      <Stack sx={{ height: '100%' }}>
         <Box
           sx={{
-            boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
-            width: "100%",
+            boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
+            width: '100%',
             backgroundColor:
-              theme.palette.mode === "light"
-                ? "#F8FAFF"
+              theme.palette.mode === 'light'
+                ? '#F8FAFF'
                 : theme.palette.background,
           }}
         >
           <Stack
-            sx={{ height: "100%", p: 2 }}
+            sx={{ height: '100%', p: 2 }}
             direction="row"
-            alignItems={"center"}
+            alignItems={'center'}
             spacing={3}
           >
             <IconButton
@@ -56,7 +56,7 @@ const Media = () => {
             >
               <ArrowLeft />
             </IconButton>
-            <Typography variant="subtitle2">Shared</Typography>
+            <Typography variant="subtitle2">Đã chia sẻ</Typography>
           </Stack>
         </Box>
 
@@ -67,10 +67,10 @@ const Media = () => {
         </Tabs>
         <Stack
           sx={{
-            height: "100%",
-            position: "relative",
+            height: '100%',
+            position: 'relative',
             flexGrow: 1,
-            overflow: "scroll",
+            overflow: 'scroll',
           }}
           spacing={3}
           padding={value === 1 ? 1 : 3}

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useTheme } from "@mui/material/styles";
+import React, { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
 import {
   Avatar,
   Box,
@@ -14,8 +14,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from "@mui/material";
-import { faker } from "@faker-js/faker";
+} from '@mui/material';
+import { faker } from '@faker-js/faker';
 import {
   Bell,
   CaretRight,
@@ -25,9 +25,9 @@ import {
   Trash,
   VideoCamera,
   X,
-} from "phosphor-react";
-import useResponsive from "../../hooks/useResponsive";
-import AntSwitch from "../../components/AntSwitch";
+} from 'phosphor-react';
+import useResponsive from '../../hooks/useResponsive';
+import AntSwitch from '../../components/AntSwitch';
 // import { useDispatch, useSelector } from "react-redux";
 // import { ToggleSidebar, UpdateSidebarType } from "../../redux/slices/app";
 
@@ -44,15 +44,15 @@ const BlockDialog = ({ open, handleClose }) => {
       onClose={handleClose}
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle>Block this contact</DialogTitle>
+      <DialogTitle>Chặn liên hệ này</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
-          Are you sure you want to block this Contact?
+          Bạn có chắc chắn muốn chặn liên hệ này?
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>Yes</Button>
+        <Button onClick={handleClose}>Hủy</Button>
+        <Button onClick={handleClose}>Đồng ý</Button>
       </DialogActions>
     </Dialog>
   );
@@ -67,15 +67,15 @@ const DeleteChatDialog = ({ open, handleClose }) => {
       onClose={handleClose}
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle>Delete this chat</DialogTitle>
+      <DialogTitle>Xóa cuộc trò chuyện này</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
-          Are you sure you want to delete this chat?
+          Bạn có chắc chắn muốn xóa cuộc trò chuyện này không?
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>Yes</Button>
+        <Button onClick={handleClose}>Hủy</Button>
+        <Button onClick={handleClose}>Đồng ý</Button>
       </DialogActions>
     </Dialog>
   );
@@ -88,7 +88,7 @@ const Contact = () => {
 
   const theme = useTheme();
 
-  const isDesktop = useResponsive("up", "md");
+  const isDesktop = useResponsive('up', 'md');
 
   const [openBlock, setOpenBlock] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
@@ -102,29 +102,29 @@ const Contact = () => {
 
   const sideBar = {
     open: true,
-    type: "CONTACT",
+    type: 'CONTACT',
   };
   return (
-    <Box sx={{ width: !isDesktop ? "100vw" : 320, maxHeight: "100vh" }}>
-      <Stack sx={{ height: "100%" }}>
+    <Box sx={{ width: !isDesktop ? '100vw' : 320, maxHeight: '100vh' }}>
+      <Stack sx={{ height: '100%' }}>
         <Box
           sx={{
-            boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
-            width: "100%",
+            boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
+            width: '100%',
             backgroundColor:
-              theme.palette.mode === "light"
-                ? "#F8FAFF"
+              theme.palette.mode === 'light'
+                ? '#F8FAFF'
                 : theme.palette.background,
           }}
         >
           <Stack
-            sx={{ height: "100%", p: 2 }}
+            sx={{ height: '100%', p: 2 }}
             direction="row"
-            alignItems={"center"}
+            alignItems={'center'}
             justifyContent="space-between"
             spacing={3}
           >
-            <Typography variant="subtitle2">Contact Info</Typography>
+            <Typography variant="subtitle2">Thông tin liên lạc</Typography>
             <IconButton
             // onClick={() => {
             //   // dispatch(ToggleSidebar());
@@ -136,10 +136,10 @@ const Contact = () => {
         </Box>
         <Stack
           sx={{
-            height: "100%",
-            position: "relative",
+            height: '100%',
+            position: 'relative',
             flexGrow: 1,
-            overflow: "scroll",
+            overflow: 'scroll',
           }}
           p={3}
           spacing={3}
@@ -155,23 +155,23 @@ const Contact = () => {
                 {current_conversation?.name}
               </Typography>
               <Typography variant="body2" fontWeight={500}>
-                {"+91 62543 28 739"}
+                {'+91 62543 28 739'}
               </Typography>
             </Stack>
           </Stack>
           <Stack
             direction="row"
             alignItems="center"
-            justifyContent={"space-evenly"}
+            justifyContent={'space-evenly'}
           >
-            <Stack alignItems={"center"} spacing={1}>
+            <Stack alignItems={'center'} spacing={1}>
               <IconButton>
                 <Phone />
               </IconButton>
 
-              <Typography variant="overline">Voice</Typography>
+              <Typography variant="overline">Ghi âm</Typography>
             </Stack>
-            <Stack alignItems={"center"} spacing={1}>
+            <Stack alignItems={'center'} spacing={1}>
               <IconButton>
                 <VideoCamera />
               </IconButton>
@@ -181,7 +181,7 @@ const Contact = () => {
           <Divider />
           <Stack spacing={0.5}>
             <Typography variant="article" fontWeight={600}>
-              About
+              Về
             </Typography>
             <Typography variant="body2" fontWeight={500}>
               {current_conversation?.about}
@@ -191,7 +191,7 @@ const Contact = () => {
           <Stack
             direction="row"
             alignItems="center"
-            justifyContent={"space-between"}
+            justifyContent={'space-between'}
           >
             <Typography variant="subtitle2">Media, Links & Docs</Typography>
             <Button
@@ -203,7 +203,7 @@ const Contact = () => {
               401
             </Button>
           </Stack>
-          <Stack direction={"row"} alignItems="center" spacing={2}>
+          <Stack direction={'row'} alignItems="center" spacing={2}>
             {[1, 2, 3].map((el) => (
               <Box>
                 <img src={faker.image.city()} alt={faker.internet.userName()} />
@@ -214,11 +214,13 @@ const Contact = () => {
           <Stack
             direction="row"
             alignItems="center"
-            justifyContent={"space-between"}
+            justifyContent={'space-between'}
           >
             <Stack direction="row" alignItems="center" spacing={2}>
               <Star size={21} />
-              <Typography variant="subtitle2">Starred Messages</Typography>
+              <Typography variant="subtitle2">
+                Tin nhắn được gắn dấu sao
+              </Typography>
             </Stack>
 
             <IconButton
@@ -233,28 +235,28 @@ const Contact = () => {
           <Stack
             direction="row"
             alignItems="center"
-            justifyContent={"space-between"}
+            justifyContent={'space-between'}
           >
             <Stack direction="row" alignItems="center" spacing={2}>
               <Bell size={21} />
-              <Typography variant="subtitle2">Mute Notifications</Typography>
+              <Typography variant="subtitle2">Tắt tiếng thông báo</Typography>
             </Stack>
 
             <AntSwitch />
           </Stack>
           <Divider />
-          <Typography variant="body2">1 group in common</Typography>
-          <Stack direction="row" alignItems={"center"} spacing={2}>
+          <Typography variant="body2">1 nhóm chung</Typography>
+          <Stack direction="row" alignItems={'center'} spacing={2}>
             <Avatar src={faker.image.imageUrl()} alt={faker.name.fullName()} />
             <Stack direction="column" spacing={0.5}>
               <Typography variant="subtitle2">Camel’s Gang</Typography>
               <Typography variant="caption">
-                Owl, Parrot, Rabbit , You
+                Owl, Parrot, Rabbit , Bạn
               </Typography>
             </Stack>
           </Stack>
           <Divider />
-          <Stack direction="row" alignItems={"center"} spacing={2}>
+          <Stack direction="row" alignItems={'center'} spacing={2}>
             <Button
               onClick={() => {
                 setOpenBlock(true);
@@ -263,7 +265,7 @@ const Contact = () => {
               startIcon={<Prohibit />}
               variant="outlined"
             >
-              Block
+              Chặn
             </Button>
             <Button
               onClick={() => {
@@ -273,7 +275,7 @@ const Contact = () => {
               startIcon={<Trash />}
               variant="outlined"
             >
-              Delete
+              Xóa
             </Button>
           </Stack>
         </Stack>

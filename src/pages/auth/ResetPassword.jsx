@@ -1,42 +1,25 @@
-import { Stack, Typography, Link } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
-import React from "react";
-import { CaretLeft } from "phosphor-react";
-import AuthResetPasswordForm from "../../sections/auth/ResetPasswordForm";
+import React from 'react';
+import { Stack, Typography, Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import ResetPasswordForm from '../../sections/auth/ResetPasswordForm';
 
-const ResetPassword = () => {
+const ResetPasswordPage = () => {
   return (
-    <>
-      <Stack spacing={2} sx={{ mb: 5, position: "relative" }}>
-        <Typography variant="h3" paragraph>
-          Forgot your password?
-        </Typography>
+    <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
+      <Typography variant="h3" paragraph>
+        Quên mật khẩu?
+      </Typography>
+      <Typography sx={{ color: 'text.secondary', mb: 5 }}>
+        Hãy nhập số điện thoại của bạn
+      </Typography>
+      <ResetPasswordForm />
 
-        <Typography sx={{ color: "text.secondary", mb: 5 }}>
-          Please enter the phone number
-        </Typography>
-      </Stack>
-
-      {/* Reset Password Form */}
-      <AuthResetPasswordForm />
-
-      <Link
-        component={RouterLink}
-        to={"/auth/login"}
-        color="inherit"
-        variant="subtitle2"
-        sx={{
-          mt: 3,
-          mx: "auto",
-          alignItems: "center",
-          display: "inline-flex",
-        }}
-      >
-        <CaretLeft size={24} />
-        Return to sign in
+      {/* Đường dẫn quay lại trang đăng nhập */}
+      <Link component={RouterLink} to="/login" variant="subtitle2">
+        Quay lại đăng nhập
       </Link>
-    </>
+    </Stack>
   );
 };
 
-export default ResetPassword;
+export default ResetPasswordPage;

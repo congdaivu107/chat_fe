@@ -18,11 +18,11 @@ export default function RegisterForm() {
 
   const RegisterSchema = Yup.object().shape({
     phoneNumber: Yup.string()
-      .required('Phone number is required')
-      .matches(/^\d{10}$/, 'Phone number must be 10 digits'),
+      .required('Yêu cầu nhập số điện thoại')
+      .matches(/^\d{10}$/, 'Số điện thoại phải có 10 chữ số'),
     password: Yup.string()
-      .required('Password is required')
-      .min(8, 'Password must be at least 8 characters'),
+      .required('Yêu cầu nhập mật khẩu')
+      .min(8, 'Mật khẩu cần dài ít nhất 8 ký tự'),
   });
 
   const defaultValues = {
@@ -57,10 +57,10 @@ export default function RegisterForm() {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(handleClick)}>
       <Stack spacing={3} mb={4}>
-        <RHFTextField name="phoneNumber" label="Phone number" />
+        <RHFTextField name="phoneNumber" label="Số điện thoại" />
         <RHFTextField
           name="password"
-          label="Password"
+          label="Mật khẩu"
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -97,7 +97,7 @@ export default function RegisterForm() {
           },
         }}
       >
-        Create Account
+        Tạo tài khoản
       </LoadingButton>
     </FormProvider>
   );

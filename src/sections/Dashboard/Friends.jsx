@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Dialog, DialogContent, Slide, Stack, Tab, Tabs } from "@mui/material";
+import React, { useEffect } from 'react';
+import { Dialog, DialogContent, Slide, Stack, Tab, Tabs } from '@mui/material';
 // import { useDispatch, useSelector } from "react-redux";
 // import {
 //   FetchFriendRequests,
@@ -10,7 +10,7 @@ import {
   FriendElement,
   FriendRequestElement,
   UserElement,
-} from "../../components/UserElement";
+} from '../../components/UserElement';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -89,15 +89,15 @@ const Friends = ({ open, handleClose }) => {
       sx={{ p: 4 }}
     >
       {/* <DialogTitle>{"Friends"}</DialogTitle> */}
-      <Stack p={2} sx={{ width: "100%" }}>
+      <Stack p={2} sx={{ width: '100%' }}>
         <Tabs value={value} onChange={handleChange} centered>
-          <Tab label="Explore" />
-          <Tab label="Friends" />
-          <Tab label="Requests" />
+          <Tab label="Khám phá" />
+          <Tab label="Bạn" />
+          <Tab label="Yêu cầu" />
         </Tabs>
       </Stack>
       <DialogContent>
-        <Stack sx={{ height: "100%" }}>
+        <Stack sx={{ height: '100%' }}>
           <Stack spacing={2.4}>
             {(() => {
               switch (value) {

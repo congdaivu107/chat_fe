@@ -56,7 +56,7 @@ export default function VerifyForm() {
     const password = localStorageService.getValue('password');
 
     if (!phoneNumber || !password) {
-      navigate('/auth/register');
+      navigate('/auth/new-password');
     } else {
       setPhoneNumber(phoneNumber);
       setPassword(password);
@@ -71,8 +71,8 @@ export default function VerifyForm() {
 
   const VerifySchema = Yup.object().shape({
     otp: Yup.string()
-      .required('OTP is required')
-      .length(6, 'OTP must be 6 digits'),
+      .required('Yêu cầu nhập mã OTP')
+      .length(6, 'OTP phải 6 kí tự'),
   });
 
   const defaultValues = {
@@ -91,7 +91,7 @@ export default function VerifyForm() {
       confirmationResult
         .confirm(data.otp)
         .then((result) => {
-          console.log('User signed in successfully:', result.user);
+          console.log('Người dùng đăng nhập thành công:', result.user);
           authService
             .register({ phoneNumber, password })
             .then((resp) => {
@@ -106,11 +106,11 @@ export default function VerifyForm() {
               navigate('/conversations');
             })
             .catch((error) => {
-              notification.error({ message: 'Error register:', error });
+              notification.error({ message: 'Lỗi đăng kí:', error });
             });
         })
         .catch((error) => {
-          notification.error({ message: 'Error verifying code:', error });
+          notification.error({ message: 'Lỗi xác minh mã:', error });
         });
     }
   };
@@ -137,7 +137,7 @@ export default function VerifyForm() {
             },
           }}
         >
-          Verify
+          Xác minh
         </Button>
       </Stack>
     </FormProvider>

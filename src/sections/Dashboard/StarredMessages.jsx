@@ -1,36 +1,36 @@
-import React from "react";
-import { useTheme } from "@mui/material/styles";
-import { Box, IconButton, Stack, Typography } from "@mui/material";
-import { ArrowLeft } from "phosphor-react";
-import useResponsive from "../../hooks/useResponsive";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { useTheme } from '@mui/material/styles';
+import { Box, IconButton, Stack, Typography } from '@mui/material';
+import { ArrowLeft } from 'phosphor-react';
+import useResponsive from '../../hooks/useResponsive';
+import { useDispatch } from 'react-redux';
 // import { UpdateSidebarType } from "../../redux/slices/app";
-import { Conversation } from "../../pages/dashboard/Conversation";
+import { Conversation } from '../../pages/dashboard/Conversation';
 
 const StarredMessages = () => {
   // const dispatch = useDispatch();
 
   const theme = useTheme();
 
-  const isDesktop = useResponsive("up", "md");
+  const isDesktop = useResponsive('up', 'md');
 
   return (
-    <Box sx={{ width: !isDesktop ? "100vw" : 320, maxHeight: "100vh" }}>
-      <Stack sx={{ height: "100%" }}>
+    <Box sx={{ width: !isDesktop ? '100vw' : 320, maxHeight: '100vh' }}>
+      <Stack sx={{ height: '100%' }}>
         <Box
           sx={{
-            boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
-            width: "100%",
+            boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
+            width: '100%',
             backgroundColor:
-              theme.palette.mode === "light"
-                ? "#F8FAFF"
+              theme.palette.mode === 'light'
+                ? '#F8FAFF'
                 : theme.palette.background,
           }}
         >
           <Stack
-            sx={{ height: "100%", p: 2 }}
+            sx={{ height: '100%', p: 2 }}
             direction="row"
-            alignItems={"center"}
+            alignItems={'center'}
             spacing={3}
           >
             <IconButton
@@ -40,15 +40,17 @@ const StarredMessages = () => {
             >
               <ArrowLeft />
             </IconButton>
-            <Typography variant="subtitle2">Starred Messages</Typography>
+            <Typography variant="subtitle2">
+              Tin nhắn được gắn dấu sao
+            </Typography>
           </Stack>
         </Box>
         <Stack
           sx={{
-            height: "100%",
-            position: "relative",
+            height: '100%',
+            position: 'relative',
             flexGrow: 1,
-            overflow: "scroll",
+            overflow: 'scroll',
           }}
           spacing={3}
         >
